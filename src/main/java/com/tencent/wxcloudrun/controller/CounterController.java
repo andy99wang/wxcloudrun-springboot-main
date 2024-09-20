@@ -47,7 +47,15 @@ public class CounterController {
 
     return ApiResponse.ok(count);
   }
-
+  /**
+   * 获取当前计数
+   * @return API response json
+   */
+  @GetMapping(value = "/api/test")
+  ApiResponse gettest() {
+    logger.info("/api/test gettest request");
+    return ApiResponse.ok("你好");
+  }
 
   /**
    * 更新计数，自增或者清零
@@ -79,5 +87,5 @@ public class CounterController {
       return ApiResponse.error("参数action错误");
     }
   }
-  
+
 }
