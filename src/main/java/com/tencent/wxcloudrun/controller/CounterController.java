@@ -56,7 +56,6 @@ public class CounterController {
   ApiResponse gettest() {
     logger.info("/api/test gettest request");
     String message=HttpUtil.get("http://47.92.225.10:8666/api/test");
-    
     return ApiResponse.ok(message);
   }
 
