@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.controller;
 
+import cn.hutool.http.HttpUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.tencent.wxcloudrun.config.ApiResponse;
@@ -54,7 +55,8 @@ public class CounterController {
   @GetMapping(value = "/api/test")
   ApiResponse gettest() {
     logger.info("/api/test gettest request");
-    return ApiResponse.ok("你好");
+    String message=HttpUtil.get("http://47.92.225.10:8666/api/test");
+    return ApiResponse.ok(message);
   }
 
   /**
