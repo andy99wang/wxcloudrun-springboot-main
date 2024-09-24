@@ -42,7 +42,7 @@ public class MhzfController {
 			}
 		}
 		String result =  HttpUtil.get(baseUrl+uri, paramMap);
-		return ApiResponse.ok(result);
+		return ApiResponse.ok(baseUrl+uri);
 	}
 	@RequestMapping(path = "/**",method = RequestMethod.POST)
 	public ApiResponse post(HttpServletRequest request,@RequestBody String jsonData) {
