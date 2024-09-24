@@ -26,28 +26,26 @@ import com.alibaba.fastjson.JSON;
 public class MhzfController {
 	private String baseUrl="http://101.200.204.27/kskj-boot";
 	@RequestMapping(path = "/**",method = RequestMethod.GET)
-	public ApiResponse get(HttpServletRequest request) {
-		//获取uri
-		String uri = request.getRequestURI();
-		uri = uri.substring(9);
-		//获取参数
-		Map<String,String[]> params = request.getParameterMap();
-		Map<String,Object> paramMap = new HashMap<String,Object>();
-		if(params!=null){
-			for(String key :params.keySet()){
-				String[] param = params.get(key);
-				if(param!=null&&param.length>0){
-					paramMap.put(key, param[0]);
+	public String get(HttpServletRequest request) {
+			//获取uri
+			String uri = request.getRequestURI();
+			//获取参数
+			Map<String,String[]> params = request.getParameterMap();
+			Map<String,Object> paramMap = new HashMap<String,Object>();
+			if(params!=null){
+				for(String key :params.keySet()){
+					String[] param = params.get(key);
+					if(param!=null&&param.length>0){
+						paramMap.put(key, param[0]);
+					}
 				}
 			}
-		}
-		String result =  HttpUtil.get(baseUrl+uri, paramMap);
-		return ApiResponse.ok(baseUrl+uri);
+			String result =  HttpUtil.get(baseUrl+uri, paramMap);
+			return result;
 	}
 	@RequestMapping(path = "/**",method = RequestMethod.POST)
-	public ApiResponse post(HttpServletRequest request,@RequestBody String jsonData) {
+	public String post(HttpServletRequest request,@RequestBody String jsonData) {
 		String uri = request.getRequestURI();
-		uri = uri.substring(9);
 		String urlParam = "";
 		//获取url拼接参数
 		Map<String,String[]> params = request.getParameterMap();
@@ -70,7 +68,7 @@ public class MhzfController {
 		}else{//针对vue转发，特殊处理
 			 result = HttpUtil.post(baseUrl+uri, vueParam);
 		}
-		return ApiResponse.ok(result);
+		return result;
 	}
 
 }
