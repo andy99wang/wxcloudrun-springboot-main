@@ -20,7 +20,7 @@ import com.alibaba.fastjson.JSON;
  * 门户接口转发,通用get请求，post body传参
  */
 //@CrossOrigin
-//@RestController
+@RestController
 //@RequestMapping("/app/mhzf")
 public class MhzfController {
 	private String baseUrl="http://101.200.204.27/kskj-boot";
