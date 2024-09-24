@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.tencent.wxcloudrun.config.ApiResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ import com.alibaba.fastjson.JSON;
 public class MhzfController {
 	private String baseUrl="http://101.200.204.27/kskj-boot";
 	@RequestMapping(path = "/**",method = RequestMethod.GET)
-	public String get(HttpServletRequest request) {
+	public ApiResponse get(HttpServletRequest request) {
 		//获取uri
 		String uri = request.getRequestURI();
 		uri = uri.substring(9);
@@ -41,10 +42,10 @@ public class MhzfController {
 			}
 		}
 		String result =  HttpUtil.get(baseUrl+uri, paramMap);
-		return result;
+		return ApiResponse.ok(result);
 	}
 	@RequestMapping(path = "/**",method = RequestMethod.POST)
-	public String post(HttpServletRequest request,@RequestBody String jsonData) {
+	public ApiResponse post(HttpServletRequest request,@RequestBody String jsonData) {
 		String uri = request.getRequestURI();
 		uri = uri.substring(9);
 		String urlParam = "";
@@ -69,7 +70,7 @@ public class MhzfController {
 		}else{//针对vue转发，特殊处理
 			 result = HttpUtil.post(baseUrl+uri, vueParam);
 		}
-		return result;
+		return ApiResponse.ok(result);
 	}
 
 }
